@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // player input
+    let playerInput = 'rock';
+    //let playerInput = prompt('rock, paper, or scissors?');
+    let playerSelection = playerInput.toLowerCase();
+    //console.log('player: ' + playerSelection);
+
+    // computer input
+    function computerPlay() {
+            // generate a random number between 0 and 2 for computer input
+            let num = Math.floor(Math.random()*3);
+            // assign word to random number
+            if (num === 0) {
+                return 'rock';
+            } else if (num === 1) {
+                return 'paper';
+            } else {
+                return 'scissors';
+            }
+        }
+    //console.log('computer: ' + computerSelection);
+
+    // // SCOREBOARD
+    let playerScore = 0;
+    let computerScore = 0;
+    // //
+
+    // one round of the game
+    function playRound(playerSelection) {
+        let computerSelection = computerPlay();
+
+        console.log(`player chose: ${playerSelection}`);
+        console.log(`computer chose: ${computerSelection}`);
+
+        if (playerSelection === computerSelection) {
+            return 'it\s a tie!';
+        } else if (playerSelection === 'rock' && computerSelection === 'scissors' || playerSelection === 'paper' && computerSelection === 'rock' || playerSelection === 'scissors' && computerSelection === 'paper') {
+            playerScore += 1;
+            return `you win! ${playerSelection} beats ${computerSelection}`;
+        } else {
+            // return if you lose
+            computerScore += 1;
+            return `you lose! ${computerSelection} beats ${playerSelection}`;
+        }
+    }
+
+    function game() {
+        console.log(playRound(playerSelection));
+        console.log(`player score: ${playerScore}, computer score: ${computerScore}`)
+        if (playerScore === 3 || computerScore === 3) {
+            return 'Game Over';
+        }
+    }
+
+    console.log(game());
+    console.log(game());
+    console.log(game());
+    console.log(game());
+    console.log(game());
+
+    </script>
+</body>
+</html>

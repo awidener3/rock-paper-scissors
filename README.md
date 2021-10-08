@@ -1,0 +1,1 @@
+A program that allows you to play Rock, Paper, Scissors with a computer. This project is to allow experimentation with pseudocde.
