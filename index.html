@@ -8,34 +8,24 @@
 </head>
 <body>
     <script>
-    // player input
-    let playerInput = 'rock';
-    //let playerInput = prompt('rock, paper, or scissors?');
-    let playerSelection = playerInput.toLowerCase();
-    //console.log('player: ' + playerSelection);
+    let playerInput = 'rock'; // player input
+    let playerSelection = playerInput.toLowerCase(); // changes input to lowercase
 
-    // computer input
-    function computerPlay() {
-            // generate a random number between 0 and 2 for computer input
-            let num = Math.floor(Math.random()*3);
-            // assign word to random number
-            if (num === 0) {
-                return 'rock';
-            } else if (num === 1) {
-                return 'paper';
-            } else {
-                return 'scissors';
-            }
+    function computerPlay() { // computer input
+        let num = Math.floor(Math.random()*3); // random number between 0 and 2
+        if (num === 0) { // 0 = rock
+            return 'rock';
+        } else if (num === 1) { // 1 = paper
+            return 'paper';
+        } else { // 2 = scissors
+            return 'scissors';
         }
-    //console.log('computer: ' + computerSelection);
+    }
 
-    // // SCOREBOARD
     let playerScore = 0;
     let computerScore = 0;
-    // //
 
-    // one round of the game
-    function playRound(playerSelection) {
+    function playRound(playerSelection) { // play one round of a game
         let computerSelection = computerPlay();
 
         console.log(`player chose: ${playerSelection}`);
@@ -47,7 +37,6 @@
             playerScore += 1;
             return `you win! ${playerSelection} beats ${computerSelection}`;
         } else {
-            // return if you lose
             computerScore += 1;
             return `you lose! ${computerSelection} beats ${playerSelection}`;
         }
@@ -60,12 +49,6 @@
             return 'Game Over';
         }
     }
-
-    console.log(game());
-    console.log(game());
-    console.log(game());
-    console.log(game());
-    console.log(game());
 
     </script>
 </body>
