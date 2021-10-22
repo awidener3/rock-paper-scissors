@@ -24,11 +24,13 @@
     let playerScore = 0;
     let computerScore = 0;
 
+    // BUTTON FUNCTIONALITY //
+
     for (let i = 0; i < options.length; i++) {
         options[i].addEventListener("click", storeChoice);
     }
     
-    function storeChoice(e) {
+    function storeChoice() {
         playerSelection = this.innerText;
         console.log('player chose ' + playerSelection);
     }   
@@ -37,7 +39,7 @@
         console.log('you chose ' + playerSelection);
     }
 
-    // ORIGINAL CODE //
+    // GAME LOGIC //
 
     function computerPlay() { // computer input
         let num = Math.floor(Math.random()*3); // random number between 0 and 2
@@ -53,28 +55,33 @@
     function playRound() { // play one round of a game
         let computerSelection = computerPlay();
 
-        console.log(`player chose: ${playerSelection}`);
-        console.log(`computer chose: ${computerSelection}`);
-
+        // console.log(`player chose: ${playerSelection}`);
+        // console.log(`computer chose: ${computerSelection}`);
+        
         if (playerSelection === computerSelection) {
-            return 'it\s a tie!';
+            // console.log('it\'s a tie!');
         } else if (playerSelection === 'rock' && computerSelection === 'scissors' || playerSelection === 'paper' && computerSelection === 'rock' || playerSelection === 'scissors' && computerSelection === 'paper') {
             playerScore += 1;
-            return `you win! ${playerSelection} beats ${computerSelection}`;
+            // console.log(`you win! ${playerSelection} beats ${computerSelection}`);
         } else {
             computerScore += 1;
-            return `you lose! ${computerSelection} beats ${playerSelection}`;
+            // console.log(`you lose! ${computerSelection} beats ${playerSelection}`);
         }
     }
 
     function game() {
-        console.log(playRound());
-        console.log(`player score: ${playerScore}, computer score: ${computerScore}`)
-        if (playerScore === 3 || computerScore === 3) {
-            return 'Game Over';
-        }
+        playRound();
+        console.log(`SCOREBOARD: \n PLAYER SCORE: ${playerScore}, COMPUTER SCORE: ${computerScore}`)
+        checkScore(playerScore, computerScore);
     }
 
+    function checkScore(playerScore, computerScore) {
+        if (playerScore === 3) {
+            console.log('Game Over, you are the winner!');
+        } else if (computerScore === 3) {
+            console.log('Game Over, you lose!');
+        }
+    }
     </script>
 </body>
 </html>
