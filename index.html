@@ -7,9 +7,37 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Rock, Paper, Scissors</h1>
+    <p>coded by Alex Widener</p>
+
+    <button class="option">rock</button>
+    <button class="option">paper</button>
+    <button class="option">scissors</button> <br><br>
+    <button id="check">Check choice</button>
+    <button id="play-game">Play!</button>
+
     <script>
-    let playerInput = 'rock'; // player input
-    let playerSelection = playerInput.toLowerCase(); // changes input to lowercase
+    const options = document.getElementsByClassName("option"); // put nodelist into options
+    const playGame = document.getElementById("play-game").addEventListener("click", game);
+    const checkChoice = document.getElementById("check").addEventListener("click", checkMe);
+    let playerSelection;
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for (let i = 0; i < options.length; i++) {
+        options[i].addEventListener("click", storeChoice);
+    }
+    
+    function storeChoice(e) {
+        playerSelection = this.innerText;
+        console.log('player chose ' + playerSelection);
+    }   
+    
+    function checkMe () {
+        console.log('you chose ' + playerSelection);
+    }
+
+    // ORIGINAL CODE //
 
     function computerPlay() { // computer input
         let num = Math.floor(Math.random()*3); // random number between 0 and 2
@@ -22,10 +50,7 @@
         }
     }
 
-    let playerScore = 0;
-    let computerScore = 0;
-
-    function playRound(playerSelection) { // play one round of a game
+    function playRound() { // play one round of a game
         let computerSelection = computerPlay();
 
         console.log(`player chose: ${playerSelection}`);
@@ -43,7 +68,7 @@
     }
 
     function game() {
-        console.log(playRound(playerSelection));
+        console.log(playRound());
         console.log(`player score: ${playerScore}, computer score: ${computerScore}`)
         if (playerScore === 3 || computerScore === 3) {
             return 'Game Over';
