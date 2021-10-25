@@ -4,26 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Rock, Paper, Scissors</title>
 </head>
 <body>
-    <h1>Rock, Paper, Scissors</h1>
-    <p>coded by Alex Widener</p>
-
-    <button class="option" value="rock">Rock</button>
-    <button class="option"value="paper">Paper</button>
-    <button class="option" value="scissors">Scissors</button> <br>
-    
-    <div id="game-area">
-        <p>^^ Please make a selection ^^</p>
+    <div id="header">
+        <h1>Rock, Paper, Scissors</h1>
     </div>
 
-    <h2>Score Board</h2>
-    <p>Player Score: <span id="player-score"></span></p>
-    <p>Computer Score: <span id="computer-score"></span></p>
+    <div id="card">
+        <div id="score-board">
+            <div id="user-label" class="badge">user</div>
+            <div id="computer-label" class="badge">comp</div>
+            <span id="user-score">0</span>:<span id="computer-score">0</span>
+        </div>
 
-    <button id="play-game">Play round</button>
-    <button id="reset">Reset</button>
+        <div id="results">
+            <p>Please make a selection.</p>
+        </div>
+        
+        <div id="choices">
+            <button id="rock" class="choice">🪨</button>
+            <button id="paper" class="choice">📜</button>
+            <button id="scissors" class="choice">✂️</button> <br>
+        </div>
+
+        <div id="game-controls">
+            <button id="reset-button">Reset</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

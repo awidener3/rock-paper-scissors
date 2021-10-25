@@ -1,81 +1,83 @@
-// SET UP VARIABLES //
-
-const options = document.getElementsByClassName("option");
-const playGame = document.getElementById("play-game").addEventListener("click", game);
-const reset = document.getElementById("reset").addEventListener("click", resetGame);
-let playerSelection;
-let playerScore = 0;
+let userScore = 0;
 let computerScore = 0;
+const userScore_span = document.getElementById('user-score');
+const computerScore_span = document.getElementById('computer-score');
+const results_div = document.getElementById('results');
+const rock_div = document.getElementById('rock');
+const paper_div = document.getElementById('paper');
+const scissors_div = document.getElementById('scissors');
+const reset_button = document.getElementById('reset-button');
 
-// BUTTON FUNCTIONALITY //
+// // //
 
-for (let i = 0; i < options.length; i++) {
-    options[i].addEventListener("click", storeChoice);
+function win(userChoice, computerChoice) {
+    const userChoice_div = document.getElementById(userChoice);
+    userScore++;
+    userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
+    results_div.innerHTML = `${userChoice} beats ${computerChoice}. You win! 👍`
+    userChoice_div.classList.add('green-glow');
+    setTimeout(function(){userChoice_div.classList.remove('green-glow')}, 500);
 }
 
-function storeChoice() {
-    playerSelection = this.value;
-    console.log('player chose ' + playerSelection);
-}   
+function lose(userChoice, computerChoice) {
+    const userChoice_div = document.getElementById(userChoice);
+    computerScore++;
+    userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
+    results_div.innerHTML = `${userChoice} loses to ${computerChoice}. You lose... 😥`
+    userChoice_div.classList.add('red-glow');
+    setTimeout(function(){userChoice_div.classList.remove('red-glow')}, 500);
+}
+
+function draw(userChoice, computerChoice) {
+    const userChoice_div = document.getElementById(userChoice);
+    results_div.innerHTML = `${userChoice} equals ${computerChoice}. It's a draw. ⚔️`
+    userChoice_div.classList.add('gray-glow');
+    setTimeout(function(){userChoice_div.classList.remove('gray-glow')}, 500);
+}
+
+function getComputerChoice() {
+    const randomNumber = Math.floor(Math.random() * 3)
+    const choices = ['rock', 'paper', 'scissors'];
+    return choices[randomNumber];
+}
+
+function game(userChoice) {
+    const computerChoice = getComputerChoice(); 
+    
+    switch(userChoice+computerChoice) {
+        case 'rockscissors':
+        case 'paperrock':
+        case 'scissorspaper':
+            win(userChoice, computerChoice);
+            break;
+        case 'rockpaper':
+        case 'paperscissors':
+        case 'scissorsrock':
+            lose(userChoice, computerChoice);
+            break;
+        case 'rockrock':
+        case 'paperpaper':
+        case 'scissorsscissors':
+            draw(userChoice, computerChoice);
+            break;
+    }
+}
 
 function resetGame() {
-    playerScore = 0;
+    userScore = 0;
     computerScore = 0;
-    playerSelection = undefined;
-    console.log('GAME RESET!')
+    userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
+    results_div.innerHTML = 'Please make a selection.'
 }
 
-// GAME LOGIC //
-
-function computerPlay() { // computer input
-    let num = Math.floor(Math.random()*3); // random number between 0 and 2
-    if (num === 0) { // 0 = rock
-        return 'rock';
-    } else if (num === 1) { // 1 = paper
-        return 'paper';
-    } else { // 2 = scissors
-        return 'scissors';
-    }
+function main() {
+    rock_div.addEventListener('click', () => game('rock'));
+    paper_div.addEventListener('click', () => game('paper'));
+    scissors_div.addEventListener('click', () => game('scissors'));
+    reset_button.addEventListener('click', () => resetGame());
 }
 
-function playRound() { // play one round of a game
-    let computerSelection = computerPlay();
-
-    // console.log(`player chose: ${playerSelection}`);
-    // console.log(`computer chose: ${computerSelection}`);
-    
-    if (playerSelection === undefined) {
-        console.log('please make a selection first');
-        return;
-    }
-
-    if (playerSelection === computerSelection) {
-        // console.log('it\'s a tie!');
-    } else if (playerSelection === 'rock' && computerSelection === 'scissors' || playerSelection === 'paper' && computerSelection === 'rock' || playerSelection === 'scissors' && computerSelection === 'paper') {
-        playerScore += 1;
-        // console.log(`you win! ${playerSelection} beats ${computerSelection}`);
-    } else {
-        computerScore += 1;
-        // console.log(`you lose! ${computerSelection} beats ${playerSelection}`);
-    }
-}
-
-function game() {
-    if (playerScore === 3 || computerScore === 3) {
-        console.log('please start a new game');
-        return;
-    }
-    playRound();
-    console.log(`SCOREBOARD: \n PLAYER SCORE: ${playerScore}, COMPUTER SCORE: ${computerScore}`)
-    checkScore(playerScore, computerScore);
-}
-
-function checkScore(playerScore, computerScore) {
-    if (playerScore === 3) {
-        console.log('Game Over, you are the winner!');
-        return;
-    } else if (computerScore === 3) {
-        console.log('Game Over, you lose!');
-        return;
-    }
-}
+main();
