@@ -43,6 +43,16 @@ function getComputerChoice() {
     return choices[randomNumber];
 }
 
+function announceWinner() {
+    let winner;
+    if (userScore = 5) {
+        winner = 'User';
+    } else {
+        winner = 'Computer';
+    }
+    results_div.innerHTML = `Game Over! ${winner} wins! 🎊`
+}
+
 function game(userChoice) {
     const computerChoice = getComputerChoice(); 
 
@@ -65,7 +75,7 @@ function game(userChoice) {
     }
 
     if (userScore == 5 || computerScore == 5) {
-        results_div.innerHTML='Game Over!'
+        announceWinner(userScore, computerScore);
         return;
     };
 }
