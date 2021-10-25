@@ -45,7 +45,7 @@ function getComputerChoice() {
 
 function game(userChoice) {
     const computerChoice = getComputerChoice(); 
-    
+
     switch(userChoice+computerChoice) {
         case 'rockscissors':
         case 'paperrock':
@@ -63,6 +63,11 @@ function game(userChoice) {
             draw(userChoice, computerChoice);
             break;
     }
+
+    if (userScore == 5 || computerScore == 5) {
+        results_div.innerHTML='Game Over!'
+        return;
+    };
 }
 
 function resetGame() {
@@ -80,4 +85,15 @@ function main() {
     reset_button.addEventListener('click', () => resetGame());
 }
 
+function checkScore() {
+    if (userScore === 5) {
+        results_div.innerHTML = "Congratulations! You won!";
+        return;
+    } else if (computerScore === 5) {
+        results_div.innerHTML = "Sorry, you lost."
+        return;
+    } else {
+        return;
+    }
+}
 main();
